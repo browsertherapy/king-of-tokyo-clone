@@ -35,16 +35,23 @@ const init = () => {
   const renderFaceUpDeck = () => {
     let faceUpListItems = '';
 
-    faceUp.forEach((item) => {
-        faceUpListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
+    // TODO: Add all card information to button
+    // TODO: Make cards more pretteh
+    faceUp.forEach((item, index) => {
+        faceUpListItems += `<li><button data-id="${index}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
     })
     
     faceUpDeck.innerHTML = faceUpListItems;
 
+    faceUpDeck.querySelectorAll('button').forEach(function(item){
+      item.addEventListener('click', buyFaceUpCard);
+    });
   }
+
   const renderDiscardDeck = () => {
     let discardListItems = '';
 
+    // TODO: Render top card only
     discard.forEach((item) => {
         discardListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
     })
@@ -61,7 +68,14 @@ const init = () => {
     renderPiles();
   }
 
-  // Render Discard Deck
+  // Buy Discard card
+  const buyFaceUpCard = event => {
+    discard.push(faceUp.splice(parseInt(event.target.getAttribute('data-id')), 1)[0]);
+    addToFaceUp(1);
+
+    renderDiscardDeck();
+    renderFaceUpDeck();
+  }
 
   const resolveDice = () => {
 
@@ -134,6 +148,7 @@ const init = () => {
   const discard = [];
   const shuffledDeck = shuffle(cards);
   const addToFaceUp = (numCards) => {
+    // TODO: Check for the end of the deck; reshuffle discards? Check rules
     for (let i = 0; i < numCards; i++) {
       faceUp.push(shuffledDeck.pop());
     }
