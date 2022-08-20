@@ -60,7 +60,8 @@ export const cards = [
     cost: 5,
     description: '+3 [VP].'
   },
-]
+];
+
 export const shuffle = (array) => {
   let currentIndex = array.length,  randomIndex;
 
