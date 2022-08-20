@@ -31,6 +31,28 @@ const init = () => {
     });
   }
 
+  // Render Deck Function
+  const renderFaceUpDeck = () => {
+    let faceUpListItems = '';
+
+    faceUp.forEach((item) => {
+        faceUpListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
+    })
+    
+    faceUpDeck.innerHTML = faceUpListItems;
+
+  }
+  const renderDiscardDeck = () => {
+    let discardListItems = '';
+
+    discard.forEach((item) => {
+        discardListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
+    })
+    
+    discardDeck.innerHTML = discardListItems;
+
+  }
+
   // TODO: Move toggleKeep to game.js file?
   const toggleKeep = event => {
     const dieId = parseInt(event.target.getAttribute('data-id'));
@@ -38,6 +60,8 @@ const init = () => {
     die.keep = !die.keep;  
     renderPiles();
   }
+
+  // Render Discard Deck
 
   const resolveDice = () => {
 
@@ -71,6 +95,8 @@ const init = () => {
   const rollPile = document.querySelector('.roll-pile');
   const keepPile = document.querySelector('.keep-pile');
   const resolvePile = document.querySelector('.resolve-pile ul');
+  const faceUpDeck = document.querySelector('.face-up-deck ul');
+  const discardDeck = document.querySelector('.discard-deck ul');
 
   let rollCount = 0;
 
@@ -105,6 +131,7 @@ const init = () => {
 
   // Cards
   const faceUp = [];
+  const discard = [];
   const shuffledDeck = shuffle(cards);
   const addToFaceUp = (numCards) => {
     for (let i = 0; i < numCards; i++) {
@@ -114,6 +141,8 @@ const init = () => {
 
   addToFaceUp(3);
   console.log(faceUp);
+  renderFaceUpDeck();
+  renderDiscardDeck();
 }
 
 init();
