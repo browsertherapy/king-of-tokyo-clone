@@ -3,7 +3,8 @@ import {dieFaces, dice, reduceRollResults} from './game.js';
 import {cards, shuffle} from './cards.js'
 
 const init = () => {
-console.log(cards)
+  // Dice
+  console.log(shuffle(cards));
   // TODO: Move renderPiles to game.js file?
   const renderPiles = () => {
     let keepListItems = '';
@@ -102,6 +103,17 @@ console.log(cards)
 
   resolveBtn.addEventListener('click', resolveDice)
 
+  // Cards
+  const faceUp = [];
+  const shuffledDeck = shuffle(cards);
+  const addToFaceUp = (numCards) => {
+    for (let i = 0; i < numCards; i++) {
+      faceUp.push(shuffledDeck.pop());
+    }
+  }
+
+  addToFaceUp(3);
+  console.log(faceUp);
 }
 
 init();
