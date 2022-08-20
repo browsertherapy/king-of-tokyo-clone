@@ -1,8 +1,9 @@
 import {roll} from 'https://unpkg.com/dice-rollr@1.0.0/index.js';
 import {dieFaces, dice, reduceRollResults} from './game.js';
+import {cards, shuffle} from './cards.js'
 
 const init = () => {
-
+console.log(cards)
   // TODO: Move renderPiles to game.js file?
   const renderPiles = () => {
     let keepListItems = '';
