@@ -15,3 +15,12 @@ class Player {
     this.cards = cards
   }
 }
+
+function Player(name, character) {
+  this.name = name ? name : ""
+  this.character = character ? character : ""
+  this.health = 10
+  this.victoryPoints = 0
+  this.energy = 0
+  this.cards = []
+}
