@@ -6,3 +6,5 @@ function Player(name, character) {
   this.energy = 0
   this.cards = []
 }
+
+export { Player }

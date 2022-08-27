@@ -1,148 +1,153 @@
-import {roll} from 'https://unpkg.com/dice-rollr@1.0.0/index.js';
-import {dieFaces, dice, reduceRollResults} from './game.js';
-import {cards, shuffle} from './cards.js'
+import { roll } from "https://unpkg.com/dice-rollr@1.0.0/index.js"
+import { dieFaces, dice, reduceRollResults } from "./game.js"
+import { cards, shuffle } from "./cards.js"
+import { Player } from "./players.js"
 
 const init = () => {
+  // Prompt for players
+  const numPlayers = prompt("How many players?");
+  const players = [];
+
+  for (let i = 1; i <= numPlayers; i++) {
+    players.push(new Player(`Player ${i}`));
+  };
+
+  console.log(players);
+
+
   // Dice
-  console.log(shuffle(cards));
+  console.log(shuffle(cards))
   // TODO: Move renderPiles to game.js file?
   const renderPiles = () => {
-    let keepListItems = '';
-    let rollListItems = '';
+    let keepListItems = ""
+    let rollListItems = ""
 
-    // TODO: Remove repetition in the next 15 lines or so 
+    // TODO: Remove repetition in the next 15 lines or so
     dice.forEach((item) => {
       if (item.keep) {
-        keepListItems += `<li><button data-id="${item.id}" class="die ${item.value}" aria-label="${item.value}"></button></li>`;
+        keepListItems += `<li><button data-id="${item.id}" class="die ${item.value}" aria-label="${item.value}"></button></li>`
       } else {
-        rollListItems += `<li><button data-id="${item.id}" class="die ${item.value}" aria-label="${item.value}"></button></li>`;      
+        rollListItems += `<li><button data-id="${item.id}" class="die ${item.value}" aria-label="${item.value}"></button></li>`
       }
     })
-    
-    // TODO: De-couple the rollPile and keepPile DOM objects -> move to toggleKeep?
-    rollPile.innerHTML = rollListItems;
-    keepPile.innerHTML = keepListItems;
-    rollPile.querySelectorAll('button').forEach(function(item){
-      item.addEventListener('click', toggleKeep);
-    });
 
-    keepPile.querySelectorAll('button').forEach(function(item){
-      item.addEventListener('click', toggleKeep);
-    });
+    // TODO: De-couple the rollPile and keepPile DOM objects -> move to toggleKeep?
+    rollPile.innerHTML = rollListItems
+    keepPile.innerHTML = keepListItems
+    rollPile.querySelectorAll("button").forEach(function (item) {
+      item.addEventListener("click", toggleKeep)
+    })
+
+    keepPile.querySelectorAll("button").forEach(function (item) {
+      item.addEventListener("click", toggleKeep)
+    })
   }
 
   // Render Deck Function
   const renderFaceUpDeck = () => {
-    let faceUpListItems = '';
+    let faceUpListItems = ""
 
     faceUp.forEach((item) => {
-        faceUpListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
+      faceUpListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`
     })
-    
-    faceUpDeck.innerHTML = faceUpListItems;
 
+    faceUpDeck.innerHTML = faceUpListItems
   }
   const renderDiscardDeck = () => {
-    let discardListItems = '';
+    let discardListItems = ""
 
     discard.forEach((item) => {
-        discardListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`;
+      discardListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">${item.label}</button></li>`
     })
-    
-    discardDeck.innerHTML = discardListItems;
 
+    discardDeck.innerHTML = discardListItems
   }
 
   // TODO: Move toggleKeep to game.js file?
-  const toggleKeep = event => {
-    const dieId = parseInt(event.target.getAttribute('data-id'));
-    const die = dice.find(item => item.id === dieId);
-    die.keep = !die.keep;  
-    renderPiles();
+  const toggleKeep = (event) => {
+    const dieId = parseInt(event.target.getAttribute("data-id"))
+    const die = dice.find((item) => item.id === dieId)
+    die.keep = !die.keep
+    renderPiles()
   }
 
   // Render Discard Deck
 
   const resolveDice = () => {
-
     // Remove click handlers from pile Dice
-    const pileDice = document.querySelectorAll('button.die');
+    const pileDice = document.querySelectorAll("button.die")
 
     pileDice.forEach((item) => {
-      item.removeEventListener('click', toggleKeep);
+      item.removeEventListener("click", toggleKeep)
     })
 
     // Disable rolling
-    rollBtn.disabled = true;
+    rollBtn.disabled = true
 
     // Reduce the results of the dice
-    const rollResults = reduceRollResults(dice);
-    console.log(rollResults);
+    const rollResults = reduceRollResults(dice)
+    console.log(rollResults)
 
     // Take reduced dice results and output to the page
-    let keptValuesDisplay = '';
-    for(let faceValue in rollResults){
-        keptValuesDisplay += `<li><button data-keep="">${faceValue} ${rollResults[faceValue]}</button></li>` 
+    let keptValuesDisplay = ""
+    for (let faceValue in rollResults) {
+      keptValuesDisplay += `<li><button data-keep="">${faceValue} ${rollResults[faceValue]}</button></li>`
     }
-    resolvePile.innerHTML = keptValuesDisplay; 
+    resolvePile.innerHTML = keptValuesDisplay
 
-    resolveBtn.disabled = true;
-
+    resolveBtn.disabled = true
   }
 
-  const rollBtn = document.querySelector('.roll-dice');
-  const resolveBtn = document.querySelector('.resolve-dice');
-  const rollPile = document.querySelector('.roll-pile');
-  const keepPile = document.querySelector('.keep-pile');
-  const resolvePile = document.querySelector('.resolve-pile ul');
-  const faceUpDeck = document.querySelector('.face-up-deck ul');
-  const discardDeck = document.querySelector('.discard-deck ul');
+  const rollBtn = document.querySelector(".roll-dice")
+  const resolveBtn = document.querySelector(".resolve-dice")
+  const rollPile = document.querySelector(".roll-pile")
+  const keepPile = document.querySelector(".keep-pile")
+  const resolvePile = document.querySelector(".resolve-pile ul")
+  const faceUpDeck = document.querySelector(".face-up-deck ul")
+  const discardDeck = document.querySelector(".discard-deck ul")
 
-  let rollCount = 0;
+  let rollCount = 0
 
-  resolveBtn.disabled = true; // disable by default
+  resolveBtn.disabled = true // disable by default
 
-
-  rollBtn.addEventListener('click', () => {
-    resolveBtn.disabled = false; // enable resolve after first roll
+  rollBtn.addEventListener("click", () => {
+    resolveBtn.disabled = false // enable resolve after first roll
 
     if (rollCount < 3) {
       dice.forEach((die) => {
         if (!die.keep) {
-          die.value = roll(dieFaces).label;
+          die.value = roll(dieFaces).label
         }
       })
-  
-      rollCount++;
 
-      renderPiles();
+      rollCount++
+
+      renderPiles()
 
       if (rollCount === 3) {
-        resolveDice();
+        resolveDice()
       }
-
     } else {
-      resolveDice();
+      resolveDice()
     }
-
   })
 
-  resolveBtn.addEventListener('click', resolveDice)
+  resolveBtn.addEventListener("click", resolveDice)
 
   // Cards
-  const faceUp = [];
-  const discard = [];
-  const shuffledDeck = shuffle(cards);
+  const faceUp = []
+  const discard = []
+  const shuffledDeck = shuffle(cards)
   const addToFaceUp = (numCards) => {
     for (let i = 0; i < numCards; i++) {
-      faceUp.push(shuffledDeck.pop());
+      faceUp.push(shuffledDeck.pop())
     }
   }
 
-  addToFaceUp(3);
-  console.log(faceUp);
-  renderFaceUpDeck();
-  renderDiscardDeck();
+  addToFaceUp(3)
+  console.log(faceUp)
+  renderFaceUpDeck()
+  renderDiscardDeck()
 }
 
-init();
+init()
