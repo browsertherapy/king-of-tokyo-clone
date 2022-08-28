@@ -128,6 +128,17 @@ const init = () => {
     renderFaceUpDeck();
     renderPlayerDecks();
   }
+  
+  const sweepFaceUpCards = () => {
+    discard = discard.concat(faceUp);
+    faceUp = [];
+    console.log(discard);
+
+    addToFaceUp(3);
+    renderDiscardDeck();
+    renderFaceUpDeck();
+
+  }
 
   const resolveDice = () => {
 
@@ -163,7 +174,7 @@ const init = () => {
     });
 
     rollCount = 0;
-    
+
     resolveBtn.disabled = true;
     rollBtn.disabled = false;
     rollPile.innerHTML = '';
@@ -180,6 +191,7 @@ const init = () => {
   const resolvePile = document.querySelector('.resolve-pile ul');
 
   const faceUpDeck = document.querySelector('.face-up-deck ul');
+  const sweepBtn = document.querySelector('.sweep-cards');
   const discardDeck = document.querySelector('.discard-deck ul');
   const playerDecks = document.querySelector('.player-decks div');
 
@@ -214,10 +226,10 @@ const init = () => {
 
   resetBtn.addEventListener('click', resetDice);
   resolveBtn.addEventListener('click', resolveDice);
-
+  
   // Cards
-  const faceUp = [];
-  const discard = [];
+  let faceUp = [];
+  let discard = [];
   const shuffledDeck = shuffle(cards);
   const addToFaceUp = (numCards) => {
     // TODO: Check for the end of the deck; reshuffle discards? Check rules
@@ -226,6 +238,8 @@ const init = () => {
     }
   }
 
+  sweepBtn.addEventListener('click', sweepFaceUpCards);
+  
   addToFaceUp(3);
   console.log(faceUp);
   renderFaceUpDeck();
