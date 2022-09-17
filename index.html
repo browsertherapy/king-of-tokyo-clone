@@ -23,10 +23,8 @@
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Bangers', cursive;
-    }
-
-    h2 {
       text-align: center;
+      margin-bottom: .25em;
     }
 
     ul {
@@ -111,42 +109,59 @@
       content: "\f0e7";
       font-size: 3em;
     } 
+
+    .sweep-cards {
+      display: block;
+      margin: auto;
+    }
+
+    @media (min-width: 1250px) {
+      div.wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <section class="roll-nav">
-      <ul>
-        <li><button class="roll-dice">Roll Dice</button></li>
-        <li><button class="resolve-dice">Resolve</button></li>
-        <li><button class="reset-dice">Reset</button></li>
-      </ul>
-    </section>
-    <section class="dice-piles">
-      <ul class="keep-pile">
-      </ul>
-      <ul class="roll-pile">
-      </ul>
-    </section>
-    <section class="resolve-pile">
-      <ul>
-      </ul>
-    </section>
-    <section class="face-up-deck">
-      <!-- Centre things -->
-      <h3>Face Up <button class="sweep-cards">Sweep Cards</button></h3>
-      <ul>
-      </ul>
-    </section>
-    <section class="discard-deck">
-      <h3>Discards</h3>
-      <ul>
-      </ul>
-    </section>
-    <section class="player-decks">
-      <h3>Players</h3>
-      <div></div>
-    </section>
+    <div class="dice">
+      <section class="roll-nav">
+        <ul>
+          <li><button class="roll-dice">Roll Dice</button></li>
+          <li><button class="resolve-dice">Resolve</button></li>
+          <li><button class="reset-dice">Reset</button></li>
+        </ul>
+      </section>
+      <section class="dice-piles">
+        <ul class="keep-pile">
+        </ul>
+        <ul class="roll-pile">
+        </ul>
+      </section>
+      <section class="resolve-pile">
+        <ul>
+        </ul>
+      </section>
+    </div>
+    <div class="cards">
+      <section class="face-up-deck">
+        <!-- Centre things -->
+        <h3>Face Up</h3>
+        <button class="sweep-cards">Sweep Cards</button>
+        <ul>
+        </ul>
+      </section>
+      <section class="discard-deck">
+        <h3>Discards</h3>
+        <ul>
+        </ul>
+      </section>
+      <section class="player-decks">
+        <h3>Players</h3>
+        <div></div>
+      </section>
+    </div>
   </div>
 </body>
 </html>
