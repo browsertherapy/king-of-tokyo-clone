@@ -50,10 +50,10 @@ const init = () => {
     // TODO: Make cards more pretteh
     faceUp.forEach((item, index) => {
         faceUpListItems += `<li><article data-id="${index}" class="card" aria-label="${item.label}">
-          <strong>${item.label}</strong><br>
-          ${item.description}<br>
-          ${item.type}<br>
-          ${item.cost}
+          <h3>${item.label}</h3>
+          <p>${item.description}</p>
+          <p>${item.type}</p>
+          <p>${item.cost}</p>
         </article></li>`;
     })
     
@@ -66,16 +66,18 @@ const init = () => {
 
   const renderDiscardDeck = () => {
     let discardListItems = '';
+    console.log(discard);
 
     // TODO: Render top card only
-    discard.forEach((item) => {
-        discardListItems += `<li><article data-id="${item.label}" class="card" aria-label="${item.label}">
-          <strong>${item.label}</strong><br>
-          ${item.description}<br>
-          ${item.type}<br>
-          ${item.cost}
-          </article></li>`;
-    })
+
+    if(discard.length > 0) {
+      discardListItems = `<li><article data-id="${discard[discard.length-1].label}" class="card" aria-label="${discard[discard.length-1].label}">
+        <h3>${discard[discard.length-1].label}</h3>
+        <p>${discard[discard.length-1].description}</p>
+        <p>${discard[discard.length-1].type}</p>
+        <p>${discard[discard.length-1].cost}</p>
+      </article></li>`;
+    }
     
     discardDeck.innerHTML = discardListItems;
 
@@ -86,12 +88,12 @@ const init = () => {
     players.forEach((player) => {
       let playerDeckItemList = '';
       player.cards.forEach((card) => {
-        playerDeckItemList += `<li><article>
-            <strong>${card.label}</strong><br>
-            ${card.description}<br>
-            ${card.type}<br>
-            ${card.cost}
-          </article></li>`;
+        playerDeckItemList += `<li><article data-id="${card.label}" class="card" aria-label="${card.label}">
+            <h3>${card.label}</h3>
+            <p>${card.description}</p>
+            <p>${card.type}</p>
+            <p>${card.cost}</p>
+          </button></li>`;
         console.log(card)
       })
       playerDeckList += `<h4>${player.name}</h4><ul>${playerDeckItemList}</ul>`;
@@ -111,16 +113,16 @@ const init = () => {
   // Buy Discard card
   const buyFaceUpCard = event => {
 
-    const activeCard = faceUp[parseInt(event.target.getAttribute('data-id'))];
+    const activeCard = faceUp[parseInt(event.currentTarget.getAttribute('data-id'))];
 
     if (activeCard.type === 'keep') {
       let toPlayer = parseInt(prompt("Which player?"));
       toPlayer--;
-      players[toPlayer].cards.push(faceUp.splice(parseInt(event.target.getAttribute('data-id')), 1)[0]);
+      players[toPlayer].cards.push(faceUp.splice(parseInt(event.currentTarget.getAttribute('data-id')), 1)[0]);
       addToFaceUp(1);
       console.log(players);
     } else if (activeCard.type === 'discard') {
-      discard.push(faceUp.splice(parseInt(event.target.getAttribute('data-id')), 1)[0]);
+      discard.push(faceUp.splice(parseInt(event.currentTarget.getAttribute('data-id')), 1)[0]);
       addToFaceUp(1);
     }
 
