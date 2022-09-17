@@ -49,17 +49,17 @@ const init = () => {
     // TODO: Add all card information to button
     // TODO: Make cards more pretteh
     faceUp.forEach((item, index) => {
-        faceUpListItems += `<li><button data-id="${index}" class="card" aria-label="${item.label}">
+        faceUpListItems += `<li><article data-id="${index}" class="card" aria-label="${item.label}">
           <strong>${item.label}</strong><br>
           ${item.description}<br>
           ${item.type}<br>
           ${item.cost}
-        </button></li>`;
+        </article></li>`;
     })
     
     faceUpDeck.innerHTML = faceUpListItems;
 
-    faceUpDeck.querySelectorAll('button').forEach(function(item){
+    faceUpDeck.querySelectorAll('article').forEach(function(item){
       item.addEventListener('click', buyFaceUpCard);
     });
   }
@@ -69,12 +69,12 @@ const init = () => {
 
     // TODO: Render top card only
     discard.forEach((item) => {
-        discardListItems += `<li><button data-id="${item.label}" class="card" aria-label="${item.label}">
+        discardListItems += `<li><article data-id="${item.label}" class="card" aria-label="${item.label}">
           <strong>${item.label}</strong><br>
           ${item.description}<br>
           ${item.type}<br>
           ${item.cost}
-          </button></li>`;
+          </article></li>`;
     })
     
     discardDeck.innerHTML = discardListItems;
@@ -86,12 +86,12 @@ const init = () => {
     players.forEach((player) => {
       let playerDeckItemList = '';
       player.cards.forEach((card) => {
-        playerDeckItemList += `<li><button>
+        playerDeckItemList += `<li><article>
             <strong>${card.label}</strong><br>
             ${card.description}<br>
             ${card.type}<br>
             ${card.cost}
-          </button></li>`;
+          </article></li>`;
         console.log(card)
       })
       playerDeckList += `<h4>${player.name}</h4><ul>${playerDeckItemList}</ul>`;
