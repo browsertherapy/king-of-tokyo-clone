@@ -232,7 +232,8 @@ const init = () => {
   // Cards
   let faceUp = [];
   let discard = [];
-  const shuffledDeck = shuffle(cards);
+  const shuffledDeck = shuffle(cards.filter((item) => item.status === 'active'));
+
   const addToFaceUp = (numCards) => {
     // TODO: Check for the end of the deck; reshuffle discards? Check rules
     for (let i = 0; i < numCards; i++) {
