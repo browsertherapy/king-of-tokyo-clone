@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>King of Tokyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Mukta:wght@300&display=swap" rel="stylesheet"> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <script type="module" src="js/dice-roller.js"></script>
+  <style>
+    body {
+      font-family: 'Mukta', sans-serif;
+      font-size: 36px;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      font-family: 'Mukta', sans-serif;
+      font-size: 32px;
+      padding: .5rem 1.5rem;
+      margin: .5rem;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Bangers', cursive;
+      text-align: center;
+      margin-bottom: .25em;
+      letter-spacing: .1rem;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding-left: 0;
+    }
+
+    
+    /* TODO: Visually disable roll/keep piles after results are resolved */ 
+    .dice-piles {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* TODO: Increase the visual hierarchy of the keep pile (increase padding? change colours?) */ 
+    .keep-pile {
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.6);
+      background-color: hsl(0deg, 0%, 93%);
+      border-radius: 1em;
+      margin-right: 1em;
+    }
+
+    .keep-pile li:first-child {
+      margin-left: 1rem;
+    }
+
+    .keep-pile li:last-child {
+      margin-right: 1rem;
+    }
+
+    .die {
+      display: block;
+      width: 5em;
+      height: 5em;
+      margin: 1rem .5rem;
+      border-radius: 1em;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      color: hsl(60deg, 90%, 55%);
+      background-color: hsl(250deg, 10%, 40%);
+      border: none;
+      box-shadow: 0px 1px 1px rgba(0,0,0,0.08), 
+              0px 2px 2px rgba(0,0,0,0.08), 
+              0px 4px 4px rgba(0,0,0,0.08), 
+              0px 8px 8px rgba(0,0,0,0.08);
+
+    }
+
+    .die:hover {
+      color: hsl(60deg, 100%, 55%);
+      background-color: hsl(250deg, 20%, 40%);
+    }
+    /* TODO: Rafactor using custom SVGs */
+    button.die.one::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f525";
+      font-size: 3em;
+    } 
+    button.die.two::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f528";
+      font-size: 3em;
+    } 
+    button.die.three::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f527";
+      font-size: 3em;
+    } 
+    button.die.attack::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f1b0";
+      font-size: 3em;
+    } 
+    button.die.heal::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f004";
+      font-size: 3em;
+    } 
+    button.die.money::before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f0e7";
+      font-size: 3em;
+    } 
+
+    .cards {
+      padding-right: 2rem;
+    }
+    .sweep-cards {
+      display: block;
+      margin: auto;
+    }
+
+    .face-up-deck ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+      gap: 1rem;
+      padding-left: 0;
+    }
+    .discard-deck ul {
+      flex-wrap: wrap;    
+    }
+
+    article.card {
+      font-size: 20px;
+      padding: 1.5rem;
+      background: lightgrey;
+      max-width: 30ch;
+      min-width: 20ch;
+      aspect-ratio: .75;
+      border-radius: 1rem;
+      box-shadow: 0px 1px 1px rgba(0,0,0,0.08), 
+        0px 2px 2px rgba(0,0,0,0.08), 
+        0px 4px 4px rgba(0,0,0,0.08), 
+        0px 8px 8px rgba(0,0,0,0.08);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="dice">
+      <section class="roll-nav">
+        <ul>
+          <li><button class="roll-dice">Roll Dice</button></li>
+          <li><button class="resolve-dice">Resolve</button></li>
+          <li><button class="reset-dice">Reset</button></li>
+        </ul>
+      </section>
+      <section class="dice-piles">
+        <ul class="keep-pile">
+        </ul>
+        <ul class="roll-pile">
+        </ul>
+      </section>
+      <section class="resolve-pile">
+        <ul>
+        </ul>
+      </section>
+    </div>
+</body>
+</html>
