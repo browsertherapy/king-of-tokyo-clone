@@ -11,6 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
   <script type="module" src="js/app.js"></script>
+  <!-- TODO: Move to external file. -->
   <style>
     body {
       font-family: 'Mukta', sans-serif;
@@ -46,7 +47,6 @@
       justify-content: center;
     }
 
-    /* TODO: Increase the visual hierarchy of the keep pile (increase padding? change colours?) */ 
     .keep-pile {
       box-shadow: inset 0 0 5px rgba(0,0,0,0.6);
       background-color: hsl(0deg, 0%, 93%);
@@ -67,22 +67,24 @@
       width: 5em;
       height: 5em;
       margin: 1rem .5rem;
-      border-radius: 1em;
-      font-size: clamp(1rem, 2vw, 1.5rem);
+
       color: hsl(60deg, 90%, 55%);
+      border-radius: 1em;
       background-color: hsl(250deg, 10%, 40%);
-      border: none;
       box-shadow: 0px 1px 1px rgba(0,0,0,0.08), 
               0px 2px 2px rgba(0,0,0,0.08), 
               0px 4px 4px rgba(0,0,0,0.08), 
               0px 8px 8px rgba(0,0,0,0.08);
+      border: none;
 
+      font-size: clamp(1rem, 2vw, 1.5rem);
     }
 
     .die:hover {
       color: hsl(60deg, 100%, 55%);
       background-color: hsl(250deg, 20%, 40%);
     }
+    
     /* TODO: Rafactor using custom SVGs */
     button.die.one::before {
       font-family: "Font Awesome 5 Free"; 

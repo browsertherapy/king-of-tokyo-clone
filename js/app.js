@@ -1,6 +1,11 @@
+// TODO: Move roll() back into main app in a game-kit file
 import {roll} from 'https://unpkg.com/dice-rollr@1.0.0/index.js';
+// TODO: move dieFaces and cards into game.js
 import {dieFaces, dice, reduceRollResults} from './game.js';
+// TODO: move shuffle() into game-kit
 import {cards, shuffle} from './cards.js';
+
+// Delete?
 import { Player } from "./players.js";
 
 const init = () => {
@@ -12,8 +17,6 @@ const init = () => {
   for (let i = 1; i <= numPlayers; i++) {
     players.push(new Player(`Player ${i}`));
   };
-
-  console.log(players);
 
   // Dice
   // TODO: Move renderPiles to game.js file?
@@ -30,7 +33,6 @@ const init = () => {
       }
     })
     
-    // TODO: De-couple the rollPile and keepPile DOM objects -> move to toggleKeep?
     rollPile.innerHTML = rollListItems;
     keepPile.innerHTML = keepListItems;
     rollPile.querySelectorAll('button').forEach(function(item){
@@ -46,8 +48,6 @@ const init = () => {
   const renderFaceUpDeck = () => {
     let faceUpListItems = '';
 
-    // TODO: Add all card information to button
-    // TODO: Make cards more pretteh
     faceUp.forEach((item, index) => {
         faceUpListItems += `<li><article data-id="${index}" class="card" aria-label="${item.label}">
           <h3>${item.label}</h3>
@@ -67,8 +67,6 @@ const init = () => {
   const renderDiscardDeck = () => {
     let discardListItems = '';
     console.log(discard);
-
-    // TODO: Render top card only
 
     if(discard.length > 0) {
       discardListItems = `<li><article data-id="${discard[discard.length-1].label}" class="card" aria-label="${discard[discard.length-1].label}">
@@ -93,7 +91,7 @@ const init = () => {
             <p>${card.description}</p>
             <p>${card.type}</p>
             <p>${card.cost}</p>
-          </button></li>`;
+          </article></li>`;
         console.log(card)
       })
       playerDeckList += `<h4>${player.name}</h4><ul>${playerDeckItemList}</ul>`;
@@ -110,7 +108,6 @@ const init = () => {
     renderPiles();
   }
 
-  // Buy Discard card
   const buyFaceUpCard = event => {
 
     const activeCard = faceUp[parseInt(event.currentTarget.getAttribute('data-id'))];
