@@ -1,10 +1,9 @@
-import {roll} from 'https://unpkg.com/dice-rollr@1.0.0/index.js';
-import {dieFaces, dice, reduceRollResults} from './game.js';
+import {roll, reduceRollResults} from './game-kit.js';
+import {dieFaces, dice} from './game.js';
 
 const init = () => {
 
   // Dice
-  // TODO: Move renderPiles to game.js file?
   const renderPiles = () => {
     let keepListItems = '';
     let rollListItems = '';
@@ -30,7 +29,6 @@ const init = () => {
     });
   }
 
-  // TODO: Move toggleKeep to game.js file?
   const toggleKeep = event => {
     const dieId = parseInt(event.target.getAttribute('data-id'));
     const die = dice.find(item => item.id === dieId);

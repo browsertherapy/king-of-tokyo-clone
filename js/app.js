@@ -2,6 +2,20 @@ import {roll, shuffle, reduceRollResults} from './game-kit.js';
 import {dieFaces, dice, cards} from './game.js';
 import { Player } from "./players.js";
 
+const rollBtn = document.querySelector('.roll-dice');
+const resolveBtn = document.querySelector('.resolve-dice');
+const resetBtn = document.querySelector('.reset-dice');
+
+const rollPile = document.querySelector('.roll-pile');
+const keepPile = document.querySelector('.keep-pile');
+const resolvePile = document.querySelector('.resolve-pile ul');
+
+const faceUpDeck = document.querySelector('.face-up-deck ul');
+const sweepBtn = document.querySelector('.sweep-cards');
+const discardDeck = document.querySelector('.discard-deck ul');
+const playerDecks = document.querySelector('.player-decks div');
+
+
 const init = () => {
   // Player Setup
   // Prompt for players
@@ -174,19 +188,6 @@ const init = () => {
     keepPile.innerHTML = '';
     resolvePile.innerHTML = '';
   }
-
-  const rollBtn = document.querySelector('.roll-dice');
-  const resolveBtn = document.querySelector('.resolve-dice');
-  const resetBtn = document.querySelector('.reset-dice');
-
-  const rollPile = document.querySelector('.roll-pile');
-  const keepPile = document.querySelector('.keep-pile');
-  const resolvePile = document.querySelector('.resolve-pile ul');
-
-  const faceUpDeck = document.querySelector('.face-up-deck ul');
-  const sweepBtn = document.querySelector('.sweep-cards');
-  const discardDeck = document.querySelector('.discard-deck ul');
-  const playerDecks = document.querySelector('.player-decks div');
 
   let rollCount = 0;
 
