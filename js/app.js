@@ -1,11 +1,5 @@
-// TODO: Move roll() back into main app in a game-kit file
-import {roll} from 'https://unpkg.com/dice-rollr@1.0.0/index.js';
-// TODO: move dieFaces and cards into game.js
-import {dieFaces, dice, reduceRollResults} from './game.js';
-// TODO: move shuffle() into game-kit
-import {cards, shuffle} from './cards.js';
-
-// Delete?
+import {roll, shuffle, reduceRollResults} from './game-kit.js';
+import {dieFaces, dice, cards} from './game.js';
 import { Player } from "./players.js";
 
 const init = () => {
