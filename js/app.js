@@ -13,7 +13,7 @@ const resolvePile = document.querySelector('.resolve-pile ul');
 const faceUpDeck = document.querySelector('.face-up-deck ul');
 const sweepBtn = document.querySelector('.sweep-cards');
 const discardDeck = document.querySelector('.discard-deck ul');
-const playerDecks = document.querySelector('.player-decks div');
+const playerDecks = document.querySelector('.player-decks');
 
 
 const init = () => {
@@ -102,7 +102,7 @@ const init = () => {
           </article></li>`;
         console.log(card)
       })
-      playerDeckList += `<h4>${player.name}</h4><ul>${playerDeckItemList}</ul>`;
+      playerDeckList += `<div><h4>${player.name}</h4><ul>${playerDeckItemList}</ul></div>`;
     })
     playerDecks.innerHTML = playerDeckList;
 

@@ -22,14 +22,15 @@
 
     button {
       font-family: 'Mukta', sans-serif;
-      font-size: 32px;
-      padding: .5rem 1.5rem;
+      font-size: 24px;
+      padding: .15rem 1rem;
       margin: .5rem;
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Bangers', cursive;
       text-align: center;
       margin-bottom: .25em;
+      margin-top: 0;
       letter-spacing: .1rem;
     }
 
@@ -38,13 +39,22 @@
       display: flex;
       justify-content: center;
       padding-left: 0;
+      margin: 0;
     }
 
+    .dice, .cards, .players {
+      margin-bottom: 5rem;
+    }
     
     /* TODO: Visually disable roll/keep piles after results are resolved */ 
     .dice-piles {
       display: flex;
       justify-content: center;
+    }
+
+    .roll-pile, .keep-pile {
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
     .keep-pile {
@@ -121,16 +131,14 @@
       font-weight: 900; 
       content: "\f0e7";
       font-size: 3em;
-    } 
-
-    .cards {
-      padding-right: 2rem;
-    }
-    .sweep-cards {
-      display: block;
-      margin: auto;
     }
 
+    .face-up-deck > h2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
     .face-up-deck ul {
       list-style: none;
       display: grid;
@@ -139,9 +147,6 @@
       gap: 1rem;
       padding-left: 0;
     }
-    .discard-deck ul {
-      flex-wrap: wrap;    
-    }
 
     article.card {
       font-size: 20px;
@@ -149,17 +154,33 @@
       background: lightgrey;
       max-width: 30ch;
       min-width: 20ch;
-      aspect-ratio: .75;
+      /* aspect-ratio: .75; */
       border-radius: 1rem;
       box-shadow: 0px 1px 1px rgba(0,0,0,0.08), 
         0px 2px 2px rgba(0,0,0,0.08), 
         0px 4px 4px rgba(0,0,0,0.08), 
         0px 8px 8px rgba(0,0,0,0.08);
     }
+
+    .player-decks {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    .player-decks div {
+        flex: 1 1 20ch;
+    }
+
+    .player-decks ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
     @media (min-width: 1800px) {
-      div.wrapper {
+      .cards {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
+        justify-items: center;
       }
     }
   </style>
@@ -188,8 +209,7 @@
     <div class="cards">
       <section class="face-up-deck">
         <!-- Centre things -->
-        <h2>Face Up</h2>
-        <button class="sweep-cards">Sweep Cards</button>
+        <h2>Power Cards <button class="sweep-cards">Sweep Cards</button></h2>
         <ul>
         </ul>
       </section>
@@ -198,9 +218,10 @@
         <ul>
         </ul>
       </section>
+    </div>
+    <div class="players">
+      <h2>Players</h2>
       <section class="player-decks">
-        <h2>Players</h2>
-        <div></div>
       </section>
     </div>
   </div>
