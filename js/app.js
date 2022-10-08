@@ -154,6 +154,7 @@ const init = () => {
 
     pileDice.forEach((item) => {
       item.removeEventListener('click', toggleKeep);
+      item.setAttribute('disabled', '');
     })
 
     // Disable rolling

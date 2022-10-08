@@ -42,6 +42,9 @@
       margin: 0;
     }
 
+    .roll-nav {
+      padding: 1rem 0;
+    }
     .dice, .cards, .players {
       margin-bottom: 5rem;
     }
@@ -131,6 +134,14 @@
       font-weight: 900; 
       content: "\f0e7";
       font-size: 3em;
+    }
+
+    .die:disabled {
+      opacity: .75;
+    }
+    .die:disabled:hover {
+      color: hsl(60deg, 90%, 55%);
+      background-color: hsl(250deg, 10%, 40%);
     }
 
     .face-up-deck > h2 {
