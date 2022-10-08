@@ -58,10 +58,12 @@ const init = () => {
 
     faceUp.forEach((item, index) => {
         faceUpListItems += `<li><article data-id="${index}" class="card" aria-label="${item.label}">
-          <h3>${item.label}</h3>
-          <p>${item.description}</p>
-          <p>${item.type}</p>
-          <p>${item.cost}</p>
+          <header>
+            <h3>${item.label}</h3>
+            <p class="price">${item.cost}</p>
+          </header>
+          <p class="description">${item.description}</p>
+          <p class="card-type">${item.type}</p>
         </article></li>`;
     })
     
@@ -78,10 +80,12 @@ const init = () => {
 
     if(discard.length > 0) {
       discardListItems = `<li><article data-id="${discard[discard.length-1].label}" class="card" aria-label="${discard[discard.length-1].label}">
-        <h3>${discard[discard.length-1].label}</h3>
-        <p>${discard[discard.length-1].description}</p>
-        <p>${discard[discard.length-1].type}</p>
-        <p>${discard[discard.length-1].cost}</p>
+        <header>
+          <h3>${discard[discard.length-1].label}</h3>
+          <p class="price">${discard[discard.length-1].cost}</p>
+        </header>
+        <p class="description">${discard[discard.length-1].description}</p>
+        <p class="card-type">${discard[discard.length-1].type}</p>
       </article></li>`;
     }
     
@@ -95,10 +99,12 @@ const init = () => {
       let playerDeckItemList = '';
       player.cards.forEach((card) => {
         playerDeckItemList += `<li><article data-id="${card.label}" class="card" aria-label="${card.label}">
-            <h3>${card.label}</h3>
-            <p>${card.description}</p>
-            <p>${card.type}</p>
-            <p>${card.cost}</p>
+            <header>
+              <h3>${card.label}</h3>
+              <p class="price">${card.cost}</p>
+            </header>
+            <p class="description">${card.description}</p>
+            <p class="card-type">${card.type}</p>
           </article></li>`;
         console.log(card)
       })
